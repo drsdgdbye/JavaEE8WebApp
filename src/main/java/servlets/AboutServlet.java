@@ -4,6 +4,6 @@ import servlets.basics.BasicServlet;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "Main", urlPatterns = "/main/*")
-public class MainServlet extends BasicServlet {
+@WebServlet(name = "About", urlPatterns = "/about/*")
+public class AboutServlet extends BasicServlet {
 }
