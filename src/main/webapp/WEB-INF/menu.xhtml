@@ -1,0 +1,15 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+    <h:form>
+        <p:growl id="messages"/>
+        <p:menubar>
+            <p:menuitem value="Main" action="#{mainController.showIndexPage()}" icon="pi pi-refresh" update="messages"/>
+            <p:menuitem value="Shop" action="#{shopController.showShopPage()}" icon="pi pi-refresh" update="messages"/>
+            <p:menuitem value="Cart" action="#{cartController.showCartPage()}" icon="pi pi-refresh" update="messages"/>
+        </p:menubar>
+    </h:form>
+</h:body>
+</html>
