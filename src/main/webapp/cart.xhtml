@@ -1,0 +1,39 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Cart"/>
+</ui:include>
+
+<body>
+<div class="container">
+    <ui:include src="WEB-INF/menu.xhtml"/>
+    <div class="col-12">
+        <h:form id="cartForm">
+            <div class="col-12">
+                <p:dataTable stileClass="table table-bordered my-2" var="item" value="#{cartController.getItems()}">
+                    <f:facet name="header">
+                        Cart
+                    </f:facet>
+                    <p:column headerText="Title">
+                        <h:outputText value="#{item.product.title}"/>
+                    </p:column>
+                    <p:column headerText="Price">
+                        <h:outputText value="#{item.product.price}"/>
+                    </p:column>
+                    <p:column headerText="Actions">
+                        <h:commandButton value="Delete" stileClass="btn btn-danger"
+                                         action="#{cartController.delete(item.product)}">
+                            <f:ajax event="click" render="cartForm"/>
+                        </h:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </div>
+</div>
+</body>
+</html>
