@@ -1,20 +1,19 @@
 package entities;
 
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "products")
+@EqualsAndHashCode(of = {"id"})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1762949555278249803L;
@@ -25,11 +24,15 @@ public class Product implements Serializable {
 
     private String title;
 
-    private BigDecimal price;
+    private Float price;
 
     private String description;
 
-    public Product(String title, String description, BigDecimal price) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Product(String title, String description, Float price, Category category) {
         this.title = title;
         this.price = price;
         this.description = description;

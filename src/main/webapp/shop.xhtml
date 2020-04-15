@@ -15,16 +15,17 @@
             <h:form id="productForm">
                 <div class="col-12">
                     <h:commandButton value="Add product" stileClass="btn btn-primary"
-                                     action="#{shopController.createProduct()}"/>
+                                     action="#{productController.createProduct()}"/>
                 </div>
+                <h:outputText value="&lt;br/&gt;" escape="false"/>
                 <div class="col-12">
                     <p:dataTable stileClass="table table-bordered my-2" var="product"
-                                 value="#{shopController.getProducts()}">
+                                 value="#{shopController.showProducts()}">
                         <f:facet name="header">
                             Product list
                         </f:facet>
-                        <p:column headerText="Id">
-                            <h:outputText value="#{product.id}"/>
+                        <p:column headerText="Category">
+                            <h:outputText value="#{product.category.title}"/>
                         </p:column>
                         <p:column headerText="Title">
                             <h:outputText value="#{product.title}"/>
@@ -37,9 +38,9 @@
                         </p:column>
                         <p:column headerText="Actions">
                             <h:commandButton value="Edit" stileClass="btn btn-success"
-                                             action="#{shopController.editProduct(product)}"/>
+                                             action="#{productController.editProduct(product)}"/>
                             <h:commandButton value="Delete" stileClass="btn btn-danger"
-                                             action="#{shopController.deleteProduct(product)}">
+                                             action="#{shopController.removeProduct(product)}">
                                 <f:ajax event="click" render="productForm"/>
                             </h:commandButton>
                             <h:commandButton value="Add to cart" stileClass="btn btn-success"

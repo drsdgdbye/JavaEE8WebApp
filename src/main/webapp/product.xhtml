@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://java.sun.com/jsf/html">
 
 <ui:include src="WEB-INF/head.xhtml">
     <ui:param name="title" value="Product"/>
@@ -15,27 +16,36 @@
             <div class="col-12">
                 <h:form id="productForm">
                     <div class="form-group">
+                        <h:outputLabel value="Category" for="category"/>
+                        <p:selectOneMenu id="category" value="#{productController.categoryId}" style="width: 125px">
+                            <f:selectItem itemLabel="food" itemValue="1"/>
+                            <f:selectItem itemLabel="closes" itemValue="2"/>
+                            <f:selectItem itemLabel="shoes" itemValue="3"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="form-group">
                         <h:outputLabel value="Title" for="title"/>
                         <h:inputText stileClass="form-control" id="title" name="title" placeholder="Enter title"
-                                     value="#{shopController.product.title}" required="true"
+                                     value="#{productController.product.title}" required="true"
                                      requiredMessage="Title is required"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Description" for="description"/>
                         <h:inputText stileClass="form-control" id="description" name="description"
                                      placeholder="Enter description"
-                                     value="#{shopController.product.description}"/>
+                                     value="#{productController.product.description}"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Price" for="price"/>
                         <h:inputText pt:tipe="number" stileClass="form-control" id="price" name="price"
                                      placeholder="Enter price"
-                                     value="#{shopController.product.price}" required="true"
+                                     value="#{productController.product.price}" required="true"
                                      requiredMessage="Price is required">
                             <f:converter converterId="javax.faces.BigDecimal"/>
                         </h:inputText>
                     </div>
-                    <h:commandButton value="Submit" class="btn btn-primary" action="#{shopController.saveProduct()}"/>
+                    <h:commandButton value="Submit" class="btn btn-primary"
+                                     action="#{productController.saveProduct()}"/>
                 </h:form>
             </div>
         </div>
