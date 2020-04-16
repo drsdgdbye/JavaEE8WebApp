@@ -1,0 +1,22 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<ui:include src="../WEB-INF/head.xhtml">
+    <ui:param name="title" value="oops!"/>
+</ui:include>
+
+<h:body>
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <div></div>
+                <h1>403</h1>
+            </div>
+            <h2>Page Forbidden</h2>
+            <a href="#{request.contextPath}/index.xhtml">main page</a>
+        </div>
+    </div>
+</h:body>
+</html>

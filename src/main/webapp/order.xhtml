@@ -1,0 +1,50 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Order"/>
+</ui:include>
+
+<body>
+<div class="container">
+    <ui:include src="WEB-INF/menu.xhtml"/>
+    <div class="col-12">
+        <h:form id="cartForm">
+            <div class="col-12">
+                <p:dataTable stileClass="table table-bordered my-2" var="item" value="#{orderController.showOrderList}">
+                    <f:facet name="header">
+                        Your orderItem:
+                    </f:facet>
+                    <p:column headerText="Title">
+                        <h:outputText value="#{item.key.title}"/>
+                    </p:column>
+                    <p:column headerText="Price">
+                        <h:outputText value="#{item.key.price}"/>
+                    </p:column>
+                    <p:column headerText="Quantity">
+                        <h:outputText value="#{item.value}"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="col-12">
+                <p:dataTable stileClass="table table-bordered my-2">
+                    <p:column headerText="Total Price:">
+                        <h:outputText value="#{orderController.showTotalPrice}"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <h:outputText value="&lt;br/&gt;" escape="false"/>
+            <div class="col-12">
+                <h:commandButton value="Return" stileClass="btn btn-info"
+                                 action="#{cartController.showCartPage}"/>
+                <h:commandButton value="Confirm" stileClass="btn btn-primary"
+                                 action="#"/>
+            </div>
+        </h:form>
+    </div>
+</div>
+</body>
+</html>

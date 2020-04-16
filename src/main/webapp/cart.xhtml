@@ -14,23 +14,34 @@
     <div class="col-12">
         <h:form id="cartForm">
             <div class="col-12">
-                <p:dataTable stileClass="table table-bordered my-2" var="item" value="#{cartController.getItems()}">
+                <p:dataTable stileClass="table table-bordered my-2" var="entry" value="#{cartController.getItems()}">
                     <f:facet name="header">
                         Cart
                     </f:facet>
                     <p:column headerText="Title">
-                        <h:outputText value="#{item.product.title}"/>
+                        <h:outputText value="#{entry.key.title}"/>
                     </p:column>
                     <p:column headerText="Price">
-                        <h:outputText value="#{item.product.price}"/>
+                        <h:outputText value="#{entry.key.price}"/>
+                    </p:column>
+                    <p:column headerText="Quantity">
+                        <h:outputText value="#{entry.value}"/>
+                    </p:column>
+                    <p:column headerText="Total Price">
+                        <h:outputText value="#{entry.value * entry.key.price}"/>
                     </p:column>
                     <p:column headerText="Actions">
                         <h:commandButton value="Delete" stileClass="btn btn-danger"
-                                         action="#{cartController.delete(item.product)}">
+                                         action="#{cartController.delete(entry.key)}">
                             <f:ajax event="click" render="cartForm"/>
                         </h:commandButton>
                     </p:column>
                 </p:dataTable>
+            </div>
+            <h:outputText value="&lt;br/&gt;" escape="false"/>
+            <div class="col-12">
+                <h:commandButton value="Check out" stileClass="btn btn-primary"
+                                 action="#{orderController.showOrderPage(cartService.itemsMap)}"/>
             </div>
         </h:form>
     </div>

@@ -1,6 +1,6 @@
 package repositories;
 
-import entities.Product;
+import entities.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
@@ -9,23 +9,24 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.util.List;
 
+//TODO make the overall structure. abstract factory maybe
 @Named
 @ApplicationScoped
-public class ProductRepository {
+public class CategoryRepository {
     private Session session;
 
-    public void insert(Product product) {
+    public void insert(Category category) {
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.save(product);
+        session.save(category);
         tx.commit();
         session.close();
     }
 
-    public void update(Product product) {
+    public void update(Category category) {
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.update(product);
+        session.update(category);
         tx.commit();
         session.close();
     }
@@ -33,28 +34,28 @@ public class ProductRepository {
     public void delete(Long id) {
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        session.delete(session.load(Product.class, id));
+        session.delete(session.load(Category.class, id));
         tx.commit();
         session.close();
     }
 
-    public Product findById(Long id) {
-        Product product;
+    public Category findById(Long id) {
+        Category category;
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        product = session.get(Product.class, id);
+        category = session.get(Category.class, id);
         tx.commit();
         session.close();
-        return product;
+        return category;
     }
 
-    public List<Product> findAll() {
-        List<Product> products;
+    public List<Category> findAll() {
+        List<Category> categories;
         session = HibernateUtil.getInstance().getSf().openSession();
         Transaction tx = session.beginTransaction();
-        products = session.createQuery("select p from Product p", Product.class).getResultList();
+        categories = session.createQuery("select p from Category p", Category.class).getResultList();
         tx.commit();
         session.close();
-        return products;
+        return categories;
     }
 }
