@@ -3,8 +3,8 @@ package services;
 import entities.Category;
 import repositories.CategoryRepository;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @SessionScoped
 public class CategoryService implements Serializable {
     private static final long serialVersionUID = 6015702456158151251L;
-    @Inject
+    @EJB
     private CategoryRepository categoryRepository;
 
     public Category getCategoryById(Long id) {

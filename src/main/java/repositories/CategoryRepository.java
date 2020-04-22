@@ -1,61 +1,20 @@
 package repositories;
 
 import entities.Category;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import utils.HibernateUtil;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Local;
+import java.io.Serializable;
 import java.util.List;
 
-//TODO make the overall structure. abstract factory maybe
-@Named
-@ApplicationScoped
-public class CategoryRepository {
-    private Session session;
+@Local
+public interface CategoryRepository extends Serializable {
+    void insert(Category category);
 
-    public void insert(Category category) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(category);
-        tx.commit();
-        session.close();
-    }
+    void update(Category category);
 
-    public void update(Category category) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(category);
-        tx.commit();
-        session.close();
-    }
+    void delete(Long id);
 
-    public void delete(Long id) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(Category.class, id));
-        tx.commit();
-        session.close();
-    }
+    Category findById(Long id);
 
-    public Category findById(Long id) {
-        Category category;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        category = session.get(Category.class, id);
-        tx.commit();
-        session.close();
-        return category;
-    }
-
-    public List<Category> findAll() {
-        List<Category> categories;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        categories = session.createQuery("select p from Category p", Category.class).getResultList();
-        tx.commit();
-        session.close();
-        return categories;
-    }
+    List<Category> findAll();
 }

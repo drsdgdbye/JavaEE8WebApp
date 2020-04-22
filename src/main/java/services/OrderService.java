@@ -26,9 +26,7 @@ public class OrderService implements Serializable {
     }
 
     public Float calculateTotalPrice() {
-        for (Map.Entry<Product, Integer> entry : orderMap.entrySet()) {
-            totalPrice += entry.getKey().getPrice() * entry.getValue();
-        }
+        orderMap.forEach((key, value) -> totalPrice += key.getPrice() * value);
         return totalPrice;
     }
 }
