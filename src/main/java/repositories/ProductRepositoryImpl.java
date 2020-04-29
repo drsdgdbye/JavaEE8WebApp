@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -28,6 +29,30 @@ public class ProductRepositoryImpl implements ProductRepository {
         session.update(product);
         tx.commit();
         session.close();
+    }
+
+    @Override
+    public List<Product> findByCategory(Long id) {
+        List<Product> products;
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("select p from Product p where p.category.id = :id", Product.class);
+        query.setParameter("id", id);
+        products = query.getResultList();
+        tx.commit();
+        session.close();
+        return products;
+    }
+
+    @Override
+    public Product findByTitle(String title) {
+        Product product;
+        session = HibernateUtil.getInstance().getSf().openSession();
+        Transaction tx = session.beginTransaction();
+        product = session.get(Product.class, title);
+        tx.commit();
+        session.close();
+        return product;
     }
 
     @Override

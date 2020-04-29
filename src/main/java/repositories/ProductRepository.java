@@ -17,4 +17,8 @@ public interface ProductRepository extends Serializable {
     Product findById(Long id);
 
     List<Product> findAll();
+
+    Product findByTitle(String name);
+
+    List<Product> findByCategory(Long id);
 }

@@ -2,11 +2,11 @@ package services;
 
 import entities.Product;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import java.io.Serializable;
 import java.util.List;
 
-@Remote
+@Local
 public interface ProductService extends Serializable {
     List<Product> getProducts();
 

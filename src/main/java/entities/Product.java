@@ -28,7 +28,7 @@ public class Product implements Serializable {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -36,5 +36,6 @@ public class Product implements Serializable {
         this.title = title;
         this.price = price;
         this.description = description;
+        this.category = category;
     }
 }

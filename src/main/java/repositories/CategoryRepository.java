@@ -17,4 +17,5 @@ public interface CategoryRepository extends Serializable {
     Category findById(Long id);
 
     List<Category> findAll();
+
 }

@@ -3,8 +3,8 @@ package controllers;
 import entities.Product;
 import services.CartService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class CartController implements Serializable {
     private static final long serialVersionUID = -3840129032309317104L;
 
-    @Inject
+    @EJB
     private CartService cartService;
 
     public String showCartPage() {
