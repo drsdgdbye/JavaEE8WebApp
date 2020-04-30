@@ -3,8 +3,8 @@ package controllers;
 import entities.Product;
 import services.ProductService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class ShopController implements Serializable {
     private static final long serialVersionUID = 6500398559644099323L;
 
-    @Inject
+    @EJB
     private ProductService productService;
 
     public String showShopPage() {

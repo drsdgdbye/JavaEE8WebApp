@@ -2,13 +2,11 @@ package services;
 
 import entities.Product;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.ejb.Stateful;
 import java.io.Serializable;
 import java.util.*;
 
-@Named
-@SessionScoped
+@Stateful
 public class CartService implements Serializable {
     private static final long serialVersionUID = -1982148133505097709L;
     private final Map<Product, Integer> items = new HashMap<>();

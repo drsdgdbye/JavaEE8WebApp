@@ -1,39 +1,18 @@
 package services;
 
 import entities.Product;
-import repositories.ProductRepository;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.ejb.Local;
 import java.io.Serializable;
 import java.util.List;
 
-@Named
-@SessionScoped
-public class ProductService implements Serializable {
-    private static final long serialVersionUID = 4480787256621840743L;
+@Local
+public interface ProductService extends Serializable {
+    List<Product> getProducts();
 
-    @Inject
-    private ProductRepository productRepository;
+    Product getProductById(Long id);
 
-    public List<Product> getProducts() {
-        return productRepository.findAll();
-    }
+    void deleteProduct(Product product);
 
-    public Product getProductById(Long id) {
-        return productRepository.findById(id);
-    }
-
-    public void deleteProduct(Product product) {
-        productRepository.delete(product.getId());
-    }
-
-    public void saveOrUpdateProduct(Product product) {
-        if (product.getId() == null) {
-            productRepository.insert(product);
-        } else {
-            productRepository.update(product);
-        }
-    }
+    void saveOrUpdateProduct(Product product);
 }

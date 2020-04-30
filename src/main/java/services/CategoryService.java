@@ -1,38 +1,20 @@
 package services;
 
 import entities.Category;
-import repositories.CategoryRepository;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.ejb.Local;
 import java.io.Serializable;
 import java.util.List;
 
-@Named
-@SessionScoped
-public class CategoryService implements Serializable {
-    private static final long serialVersionUID = 6015702456158151251L;
-    @Inject
-    private CategoryRepository categoryRepository;
+@Local
+public interface CategoryService extends Serializable {
+    Category getCategoryById(Long id);
 
-    public Category getCategoryById(Long id) {
-        return categoryRepository.findById(id);
-    }
+    void saveCategory(Category category);
 
-    public void saveCategory(Category category) {
-        categoryRepository.insert(category);
-    }
+    void updateCategory(Category category);
 
-    public void updateCategory(Category category) {
-        categoryRepository.update(category);
-    }
+    List<Category> findAllCategories();
 
-    public List<Category> findAllCategories() {
-        return categoryRepository.findAll();
-    }
-
-    public void deleteCategory(Long id) {
-        categoryRepository.delete(id);
-    }
+    void deleteCategory(Long id);
 }

@@ -1,60 +1,24 @@
 package repositories;
 
 import entities.Product;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import utils.HibernateUtil;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Local;
+import java.io.Serializable;
 import java.util.List;
 
-@Named
-@ApplicationScoped
-public class ProductRepository {
-    private Session session;
+@Local
+public interface ProductRepository extends Serializable {
+    void insert(Product product);
 
-    public void insert(Product product) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(product);
-        tx.commit();
-        session.close();
-    }
+    void update(Product product);
 
-    public void update(Product product) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.update(product);
-        tx.commit();
-        session.close();
-    }
+    void delete(Long id);
 
-    public void delete(Long id) {
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        session.delete(session.load(Product.class, id));
-        tx.commit();
-        session.close();
-    }
+    Product findById(Long id);
 
-    public Product findById(Long id) {
-        Product product;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        product = session.get(Product.class, id);
-        tx.commit();
-        session.close();
-        return product;
-    }
+    List<Product> findAll();
 
-    public List<Product> findAll() {
-        List<Product> products;
-        session = HibernateUtil.getInstance().getSf().openSession();
-        Transaction tx = session.beginTransaction();
-        products = session.createQuery("select p from Product p", Product.class).getResultList();
-        tx.commit();
-        session.close();
-        return products;
-    }
+    Product findByTitle(String name);
+
+    List<Product> findByCategory(Long id);
 }

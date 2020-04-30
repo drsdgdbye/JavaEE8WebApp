@@ -1,12 +1,13 @@
 package controllers;
 
 import entities.Product;
+import lombok.Getter;
 import lombok.Setter;
 import services.CategoryService;
 import services.ProductService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -15,13 +16,15 @@ import java.io.Serializable;
 public class ProductController implements Serializable {
     private static final long serialVersionUID = 5154582703258017555L;
     @Setter
+    @Getter
     private Product product;
     @Setter
+    @Getter
     private String categoryId;
 
-    @Inject
+    @EJB
     private ProductService productService;
-    @Inject
+    @EJB
     private CategoryService categoryService;
 
     public String createProduct() {
