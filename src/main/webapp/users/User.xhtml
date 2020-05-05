@@ -1,0 +1,44 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://java.sun.com/jsf/html">
+
+<ui:include src="../WEB-INF/head.xhtml">
+    <ui:param name="title" value="Product"/>
+</ui:include>
+
+<h:body>
+    <div class="container">
+        <ui:include src="../WEB-INF/menu.xhtml"/>
+        <div class="row py-2">
+            <div class="col-12">
+                <h:form id="userForm">
+                    <div class="form-group">
+                        <h:outputLabel value="Role" for="role"/>
+                        <p:selectOneMenu id="role" value="#{userController.allRoles}" style="width: 125px">
+                            <f:selectItem itemLabel="Admin" itemValue="1"/>
+                            <f:selectItem itemLabel="Guest" itemValue="2"/>
+                            <f:selectItem itemLabel="Manager" itemValue="3"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Username" for="username"/>
+                        <h:inputText stileClass="form-control" id="username" name="Username" placeholder="Username"
+                                     value="#{userController.user.username}" required="true"
+                                     requiredMessage="Username is required"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Password" for="password"/>
+                        <h:inputText stileClass="form-control" id="password" name="password"
+                                     placeholder="Enter password"
+                                     value="#{userController.user.password}"/>
+                    </div>
+                    <h:commandButton value="Submit" class="btn btn-primary"
+                                     action="#{userController.saveUser}"/>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
