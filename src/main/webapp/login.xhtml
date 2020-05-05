@@ -1,0 +1,28 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="title" value="Login"/>
+</ui:include>
+
+<h:body>
+    <ui:include src="WEB-INF/menu.xhtml"/>
+    <div class="container">
+        <form action="#{request.contextPath}/j_security_check">
+            <div class="form-group">
+                <h:outputLabel value="User name" for="j_username"/>
+                <h:inputText styleClass="form-control" id="j_username" placeholder="Enter username"
+                             name="j_username" required="true" requiredMessage="Username is required"/>
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Password" for="j_password"/>
+                <h:inputSecret styleClass="form-control" id="j_password" placeholder="Password"
+                               name="j_password"/>
+            </div>
+            <input type="submit" value="Login" class="btn btn-primary" formmethod="post"/>
+        </form>
+    </div>
+</h:body>
+
+</html>
